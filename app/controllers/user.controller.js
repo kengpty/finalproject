@@ -73,7 +73,7 @@ exports.signup = function(req,res,next){
         user.save(function(err){
             console.log(user);
             if(err) console.log(err);
-            // res.redirect('homepage1',{registerFail:true});
+            //res.redirect('homepage1',{registerFail:true});
             req.login(user,function(err){
                 if(err) return next(err);
                 return res.redirect('/');

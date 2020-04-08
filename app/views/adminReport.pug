@@ -1,0 +1,61 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container" >
+  <div class="row col-md-10 col-md-offset-1 custyle" >
+    <table class="table table-striped custab" style="border: 1px solid #ccc;  padding: 5px; margin: 5% 0; box-shadow: 3px 3px 2px #ccc; transition: 0.5s;">
+    <thead>
+        <tr>
+            <th>หมายเลขออเดอร์</th>
+            <th>รุ่นรถบรรทุก</th>
+            <th>หมายเลขทะเบียนรถ</th>
+            <th>สถานะการขนส่ง</th>
+            <th class="text-center">แก้ไข</th>
+        </tr>
+    </thead>
+    each a,index in data
+      <tr>
+          <th scope="row">#{a.orderNo}</th>
+          <td>#{a.truckType}</td>
+          <td>#{a.licensePlate}</td>
+          <td>#{a.status}</td>
+          <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{a.orderNo}" span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+      </tr>
+    
+           
+    </table>
+
+
+    <table class="table table-striped custab" style="border: 1px solid #ccc;  padding: 5px; margin: 5% 0; box-shadow: 3px 3px 2px #ccc; transition: 0.5s;">
+   
+    <thead>
+      <tr>
+        <th scope="col">หมายเลขออเดอร์</th>
+        <th scope="col">รุ่นรถบรรทุก</th>
+        <th scope="col">หมายเลขทะเบียนรถ</th>
+        <th scope="col">สถานะการขนส่ง</th>
+        <th class="text-center">แก้ไข</th>
+      </tr>
+    </thead>
+    <tbody>
+    each b,index in data2json
+      - var count = 0
+      - count=count+1
+      <tr>
+        <th scope="row">#{data2[index].orderNo}</th>
+        <td>#{b[index].type},<br>#{b[count].type}</td>
+        <td>#{b[0].licensePlate},<br>#{b[count].licensePlate}</td>
+        <td>#{data2[index].status}</td>
+        <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{data2[index].orderNo}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+
+        <td></td>
+      </tr>
+      
+    </tbody>
+    </table>
+  </div>
+</div>
+

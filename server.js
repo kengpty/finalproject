@@ -6,7 +6,7 @@ var app = express();
 var passport = passport();
 
 
-app.listen(3000);
+app.listen(1000);
 module.exports = app;
 
 console.log('server running')

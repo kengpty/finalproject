@@ -27,12 +27,17 @@ module.exports = function(){
     
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(express.static('picture'))
 
     app.set('views','./app/views');
     app.set('view engine','pug');
 
+
+    require('../app/routes/admin.route')(app);
     require('../app/routes/index.routes')(app);
     require('../app/routes/user.routes')(app);
     require('../app/routes/transport.routes')(app);
+    require('../app/routes/status.routes')(app);
+    require('../app/routes/contact.route')(app);
     return app;
 };

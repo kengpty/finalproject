@@ -1,0 +1,43 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+head  
+    style.
+        .title{
+            margin-top: 15px ;
+            font-weight: bold ;
+        }
+        .report{
+            margin: 0 ;
+            position: absolute ;
+            top: 20% ;
+            left: 50% ;
+            margin-right: -50% ;
+            transform: translate(-50%, -50%) ;
+            border-style: groove ;
+            border-width: 10px 10px ;
+            padding-top: 50px;
+            padding-right: 50px;
+            padding-bottom: 50px;
+            padding-left: 50px;
+            
+        }
+<!---------------------------------------------------->
+
+<div class='report'>
+    <p><span class='title'> หมายเลขออเดอร์ : </span><span>#{data.orderNo}</span></p>
+    <p><span class='title'> userID : </span><span>#{data.userID}</span></p>
+    <p><span class='title'> ชื่อ-นามสกุล : </span><span>#{data.fullname}</span></p>
+    <p><span class='title'> ที่อยู่1 : </span><span>#{data.address1}</span></p>
+    <p><span class='title'> ที่อยู่2 : </span><span>#{data.address2}</span></p>
+    <p><span class='title'> ชนิดของพาเลท : </span><span>#{data.palletsize} &nbsp; จำนวน : #{data.qty} </span></p>
+    <select id="status">
+        <option>#{data.status}</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+    </select>
+    <p><span class='title'> สถานะ : </span><span>#{data.status}</span></p>
+</div>

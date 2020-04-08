@@ -10,9 +10,8 @@ var TruckSchema = new Schema({
     width : {type: Number},
     maximumPayload : {type: Number},
     status : {type: String},
-    euroPallet : {type: Number},
-    japanPallet : {type: Number},
-    thaiPallet : {type: Number}
+    pallet : {type: Number}
+   
 })
 
 mongoose.model('trucks',TruckSchema);  

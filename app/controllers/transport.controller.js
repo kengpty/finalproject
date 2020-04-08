@@ -1,91 +1,259 @@
-
+var Transport = require('mongoose').model('transports')
+var Trucks = require('mongoose').model('trucks');
+var order =require('mongoose').model('order')
 
 exports.render = function(req,res){
    
     res.render('transport',{
-        username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : ''});
+        username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : ''});
         
 };
 
-var Trucks = require('mongoose').model('trucks');
-var Pallet = require('mongoose').model('pallets');
+// var Pallet = require('mongoose').model('pallets');
 exports.getOrder= function(req,res){
+    
     //maxPalletfortruck
     var maxPallet = 12
     var minPallet = 8
     // var palletName=req.body.palletSize
     console.log("PalletSize = "+req.body.palletSize)
-    Pallet.find({'palletName': req.body.palletSize},(err, data) => {
-        var Qty = parseInt(req.body.Qty)
-        
-        console.log('this is Qty = '+Qty)
-        // length_pallet*=Qty
-        // console.log(Qty)
-        // console.log(length_pallet)
-        // console.log(width_pallet)
-        // Trucks.find({$and:[{'length':{$gte:length_pallet} },{'status':'ready'}]},(err, data) => {
-            // Trucks.find({containPallet},(err, data) => {
-            //     console.log(data[0])
-            //     if(data[0]==undefined){ res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',truckNotAvailable:true})}
-            // })
+   
+    var Qty = parseInt(req.body.Qty)
+    console.log('this is Qty = '+Qty)
     
-        
-        
-        //normal case QTY<=12
-        if(Qty<=maxPallet)
-            Trucks.findOneAndUpdate({$and:[{'@pallet':{$gte:Qty}},{'status':'ready'}]},{$set:{'status':'unready'}},(err, data)=>{
-                let inHandPallet=Qty
-                console.log(data)
-                console.log(inHandPallet)
+    
+    if(Qty<=8){
+        console.log('CASE1')
+        order.findOne({},(err,orderdata)=>{
+            
+            
+            Trucks.find({$and:[{'pallet':{$lte:maxPallet}},{'status':'ready'}]},(err, data)=>{
+                //save
+                if(data[0]!=null){
+                    var transports = new Transport({
+                        transportType:1,
+                        orderNo:orderdata.orderNo,
+                        userID:req.body.userID,
+                        fullname: req.body.username,
+                        palletsize:req.body.palletSize,
+                        qty:Qty,
+                        tel:req.body.tel,
+                        licensePlate:data[0].licensePlate,
+                        truckType:data[0].type,
+                        address1:req.body.address1,
+                        address2:req.body.address2
+                    })
+                    transports.save(function(err){
+                        if(err){
+                            console.log(err)
+                        }else{
+                            //อัพเดทสถานะของรถเมื่อได้เซฟลงdatabaseในส่วนTransportแล้ว
+                            Trucks.findOneAndUpdate({"licensePlate":data[0].licensePlate}, {$set: {"status":"unready"}}, {upsert: true}, function(err,doc) {
+                                if (err) { throw err; }
+                                else { console.log("Updated"); }
+                            }); 
+                            order.findOneAndUpdate({"orderNo":orderdata.orderNo}, {$set: {"orderNo":orderdata.orderNo+1}}, {upsert: true}, function(err,doc) {
+                                if (err) { throw err; }
+                                else { console.log("Updated"); }
+                            }); 
+                            
+                            res.render('homepage1',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',transpotsuccess:true})
+                        }
+                    })
+                }
+                // กรณีไม่มีรถว่างเลย
+                if(data[0]==undefined){
+                    res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
+                }   
+            }) 
+        })
+       
+    } 
+    if(Qty>=9 && Qty<=12){
+        console.log('CASE2')
+        order.findOne({},(err,orderdata)=>{
+            Trucks.find({$and:[{'pallet':{$gte:maxPallet}},{'status':'ready'}]},(err, data)=>{
+                //ยังทำไม่เสร็จ !!!!!!!!! รอทำ save
+                
+                if(data[0]!=null){
+                    var transports = new Transport({
+                        transportType:1,
+                        orderNo:orderdata.orderNo,
+                        userID:req.body.userID,
+                        fullname: req.body.username,
+                        palletsize:req.body.palletSize,
+                        qty:Qty,
+                        tel:req.body.tel,
+                        licensePlate:data[0].licensePlate,
+                        truckType:data[0].type,
+                        address1:req.body.address1,
+                        address2:req.body.address2
+                    })
+                    transports.save(function(err){
+                        if(err){
+                            console.log(err)
+                        }else{
+                            //อัพเดทสถานะของรถเมื่อได้เซฟลงdatabaseในส่วนTransportแล้ว
+                            Trucks.findOneAndUpdate({"licensePlate":data[0].licensePlate}, {$set: {"status":"unready"}}, {upsert: true}, function(err,doc) {
+                                if (err) { throw err; }
+                                else { console.log("TransportUpdated"); }
+                            }); 
+                            order.findOneAndUpdate({"orderNo":orderdata.orderNo}, {$set: {"orderNo":orderdata.orderNo+1}}, {upsert: true}, function(err,doc) {
+                                if (err) { throw err; }
+                                else { console.log("orderNoUpdated"); }
+                            }); 
+                            
+                            res.render('homepage1',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',transpotsuccess:true})
+                        }
+                    })
+                }
+                // กรณีรถใหญ่เต็ม
+                if(data[0]==undefined){
+                    Trucks.find({$and:[{'pallet':{$lte:minPallet}},{'status':'ready'}]},(err, data)=>{
+                        var countQTY=0
+                        var count =0
+                        //truckForUse เก็บข้อมูลรถคันเล็กที่ใช้
+                        // console.log(data)
+                        var truckForUse=[]
+                        
+                        if(data[0]!=null){
+                            for(let i=0;countQTY<=Qty;i++){
+                                if(data[i]==undefined){
+                                    return  res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
+                                }
+                                truckForUse.push({licensePlate:data[i].licensePlate,type:data[i].type})  
+                                // truckTypeForUse.push({type:data[i].type}) 
+                                // truckForUse[i]=data[i],
+                                
+                                countQTY+=data[i].pallet
+                                count++
+                               
+                            }
+                            // var json = JSON.parse(truckForUse)
+                            var json = JSON.stringify(truckForUse)
+                            // var a=JSON.parse(json.licensePlate)
+                            var transports = new Transport({
+                                transportType:2,
+                                orderNo:orderdata.orderNo,
+                                userID:req.body.userID,
+                                fullname: req.body.username,
+                                palletsize:req.body.palletSize,
+                                qty:Qty,
+                                tel:req.body.tel,
+                                // licensePlate:JSON.stringify(truckForUse),
+                                licensePlate:json,
+                                // truckType:truckTypeForUse[0],
+                                address1:req.body.address1,
+                                address2:req.body.address2
+                            })
+                            transports.save(function(err){
+                                if(err){
+                                    console.log(err)
+                                }else{
+                                    for(let i=0;i<count;i++){
+                                        Trucks.findOneAndUpdate({"licensePlate":data[i].licensePlate}, {$set: {"status":"unready"}}, {upsert: true}, function(err,doc) {
+                                            if (err) { throw err; }
+                                            else { console.log("TransportUpdated"); }
+                                        }); 
+                                    }
+                                    order.findOneAndUpdate({"orderNo":orderdata.orderNo}, {$set: {"orderNo":orderdata.orderNo+1}}, {upsert: true}, function(err,doc) {
+                                        if (err) { throw err; }
+                                        else { console.log("orderNoUpdated"); }
+                                    }); 
+                                    res.render('homepage1',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',transpotsuccess:true})
+                                }
+                            })
+                            
+                        }
+                        if(data[0]==undefined){
+                            res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
+                       
+    
+                        }  
+                        //ดึงดาต้าเบสแบบarrayมาเป็นjson
+                        // Transport.find({$and:[{'orderNo':6},{'userID':'test'}]},(err, data)=>{
+                        //    console.log(data[0]. licensePlate)
+                        //    var obj = JSON.parse(data[0]. licensePlate)
+                        //    console.log(obj[0].licensePlate)
+                        // })
+                       
+                        
+                    })
+                }
             })
-        //case QTY>12
-        roundQty = Math.ceil(Qty/12)
-        console.log('roundQty ='+roundQty)
-         
-        // for(let i=1;i<=roundQty;i++){
-            
-        //     Trucks.find({$and:[{'@pallet':{$gte:12}},{'status':'ready'}]},(err, data)=>{
-        //     if(data[i-1]==undefined){
-                
-                
-        //         console.log(data[i-1])
-        //         res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',truckNotAvailable:true})
-        //     }else{
-        //         console.log(data[i-1])
-        //     }
-            
-            
-        //     })
-        
-        // }
-        
-        // if(exit==1){
-            
-        //     res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',truckNotAvailable:true})
-             
-        // }    
-        
+        })
+    }
+    if(Qty>12){
+       
+        order.findOne({},(err,orderdata)=>{
+            Trucks.find({$and:[{'pallet':{$lte:maxPallet}},{'status':'ready'}]},(err, data)=>{
+                var countQTY=0
+                var count =0
+                var truckForUse=[]
+                if(data[0]!=null){
+                    for(let i=0;countQTY<=Qty;i++){
+                        if(data[i]==undefined){
+                            return  res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
+                        }
+                        truckForUse.push({licensePlate:data[i].licensePlate,type:data[i].type})  
+                        // truckTypeForUse.push({type:data[i].type}) 
+                        // truckForUse[i]=data[i].licensePlate
+                        
+                        countQTY+=data[i].pallet
+                        count++
+                       
+                    }
+                    var json = JSON.stringify(truckForUse)
+
+                    var transports = new Transport({
+                        transportType:2,
+                        orderNo:orderdata.orderNo,
+                        userID:req.body.userID,
+                        fullname: req.body.username,
+                        palletsize:req.body.palletSize,
+                        qty:Qty,
+                        tel:req.body.tel,
+                        // licensePlate:JSON.stringify(truckForUse),
+                        licensePlate:json,
+                        // truckType:truckTypeForUse[0],
+                        address1:req.body.address1,
+                        address2:req.body.address2
+                    })
+                    transports.save(function(err){
+                        if(err){
+                            console.log(err)
+                        }else{
+                            for(let i=0;i<count;i++){
+                                Trucks.findOneAndUpdate({"licensePlate":data[i].licensePlate}, {$set: {"status":"unready"}}, {upsert: true}, function(err,doc) {
+                                    if (err) { throw err; }
+                                    else { console.log("TransportUpdated"); }
+                                }); 
+                            }
+                            order.findOneAndUpdate({"orderNo":orderdata.orderNo}, {$set: {"orderNo":orderdata.orderNo+1}}, {upsert: true}, function(err,doc) {
+                                if (err) { throw err; }
+                                else { console.log("orderNoUpdated"); }
+                            }); 
+                            res.render('homepage1',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',transpotsuccess:true})
+                        }
+                    })
+                    
+                }
+                if(data[0]==undefined){
+                    res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
+                }
+               
+            })
 
 
-       
-       
-        if(req.body.palletSize =='Euro_Pallet'){
-            var num = req.body.Qty
-            if(num<=8){
-                Trucks.find({$and:[{'euroPallet':{$gte:num}},{'status':'ready'}]},(err, data) => {
-                // console.log(data[0].licensePlate)
-                // console.log('euroPallet = '+data[0].euroPallet)
-            })
-            }
+
+        })
+                
+               
         }
        
-        for(j=0;j<data.length;j++){
-            Trucks.find({},(err,data)=>{
-                if(data[j].width){}
-            })
-        }
-    })
-    
+        
+        
+        
 };
 
     

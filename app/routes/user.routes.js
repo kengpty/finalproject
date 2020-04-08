@@ -3,10 +3,8 @@ module.exports = function(app){
     var passport = require('passport')
     // app.post('/login',user.login);
     app.route('/login').post(passport.authenticate('local',{
-        failureRedirect: '/user',
+        failureRedirect: '/indexFail',
         successRedirect: '/',
-        
-        
     }));
     // app.post('/login',passport.authenticate('local',{
     //     successRedirect: '/',

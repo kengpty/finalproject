@@ -1,0 +1,155 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200323.205223.6692.0.001.json",
+    "dumpEventTime": "2020-03-23T20:52:23Z",
+    "dumpEventTimeStamp": "1584971543594",
+    "processId": 6692,
+    "cwd": "C:\\Users\\keng\\Desktop\\final_project",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "server.js"
+    ],
+    "nodejsVersion": "v12.13.1",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.13.1",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.13.1/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.17763",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 15991468,
+        "nice": 0,
+        "sys": 5586765,
+        "idle": 42126875,
+        "irq": 1636234
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 14973953,
+        "nice": 0,
+        "sys": 2640984,
+        "idle": 46089968,
+        "irq": 153500
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 15513453,
+        "nice": 0,
+        "sys": 3357484,
+        "idle": 44833968,
+        "irq": 111156
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 15392359,
+        "nice": 0,
+        "sys": 2637531,
+        "idle": 45675015,
+        "irq": 77671
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 15970968,
+        "nice": 0,
+        "sys": 3763015,
+        "idle": 43970921,
+        "irq": 82812
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 14014375,
+        "nice": 0,
+        "sys": 2724015,
+        "idle": 46966515,
+        "irq": 75218
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 16361500,
+        "nice": 0,
+        "sys": 3406656,
+        "idle": 43936750,
+        "irq": 76484
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 11737078,
+        "nice": 0,
+        "sys": 2711375,
+        "idle": 49256453,
+        "irq": 60609
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 16197296,
+        "nice": 0,
+        "sys": 3607734,
+        "idle": 43899875,
+        "irq": 87593
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 12042921,
+        "nice": 0,
+        "sys": 3031375,
+        "idle": 48630609,
+        "irq": 64781
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 16716515,
+        "nice": 0,
+        "sys": 3369703,
+        "idle": 43618687,
+        "irq": 86187
+      },
+      {
+        "model": "AMD Ryzen 5 1600 Six-Core Processor            ",
+        "speed": 3194,
+        "user": 12290375,
+        "nice": 0,
+        "sys": 3134187,
+        "idle": 4

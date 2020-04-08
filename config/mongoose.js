@@ -6,6 +6,8 @@ module.exports = function(){
     require('../app/models/user.model');
     require('../app/models/pallet.model');
     require('../app/models/Truck.model');
-
+    require('../app/models/transport.model')
+    require('../app/models/CountOrder.model')
+    require('../app/models/admin.model')
     return db;
 }

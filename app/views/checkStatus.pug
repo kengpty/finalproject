@@ -9,16 +9,16 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-expand-sm " >
+<nav class="navbar navbar-inverse navbar-expand-sm" >
   <div class="container-fluid">
     <div class="navbar-header">
         <a class="navbar-brand" >
-            img(src="logo.png" alt='logo' height="110" )
+             img(src="logo.png" alt='logo' height="110" )
         </a>
     </div>
     
     <ul class="nav navbar-nav" style="font-size:16px">
-      <li class="active"><a href="/">หน้าหลัก</a></li>
+      <li ><a href="/">หน้าหลัก</a></li>
       <li><a href="/contact">ติดต่อ</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">ข้อมูลรถบรรทุก</a>
         <div class="dropdown-menu" style="font-size:14px">
@@ -147,7 +147,7 @@
           </div></div>
       if username
         <li><a href="/transport">ขนส่ง</a></li>
-        <li><a href="/checkStatus">เช็คสถานะการขนส่ง</a></li> 
+        <li class="active"><a href="/checkStatus">เช็คสถานะการขนส่ง</a></li> 
     </ul>
     
     if username
@@ -191,4 +191,55 @@
     </div>
 
 </div>
-
+<h2 align="center"> เช็คสถานะการขนส่งของคุณ #{username}
+<hr>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">หมายเลขออเดอร์</th>
+      <th scope="col">รุ่นรถบรรทุก</th>
+      <th scope="col">หมายเลขทะเบียนรถ</th>
+      <th scope="col">สถานะการขนส่ง</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  each a in data1
+    <tr>
+      <th scope="row">#{a.orderNo}</th>
+      <td>#{a.truckType}</td>
+      <td>#{a.licensePlate}</td>
+      <td>#{a.status}</td>
+       <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{a.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+    </tr>
+  
+    </tbody>
+   
+</table>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">หมายเลขออเดอร์</th>
+      <th scope="col">รุ่นรถบรรทุก</th>
+      <th scope="col">หมายเลขทะเบียนรถ</th>
+      <th scope="col">สถานะการขนส่ง</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+<tbody>
+  each b,index in data2json
+    - var count = 0
+    - count=count+1
+    <tr>
+      <th scope="row">#{data2[index].orderNo}</th>
+      <td>#{b[index].type},<br>#{b[count].type}</td>
+      <td>#{b[0].licensePlate},<br>#{b[count].licensePlate}</td>
+      <td>#{data2[index].status}</td>
+      <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{data2[index].orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+      <td></td>
+    </tr>
+    
+    
+  
+</tbody>
+</table>
