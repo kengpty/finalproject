@@ -210,7 +210,7 @@
       <td>#{a.truckType}</td>
       <td>#{a.licensePlate}</td>
       <td>#{a.status}</td>
-       <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{a.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+       <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{a.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
     </tr>
   
     </tbody>
@@ -235,7 +235,7 @@
       <td>#{b[index].type},<br>#{b[count].type}</td>
       <td>#{b[0].licensePlate},<br>#{b[count].licensePlate}</td>
       <td>#{data2[index].status}</td>
-      <td class="text-center"><a class='btn btn-info btn-xs' href="/admin/edit?order=#{data2[index].orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+      <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{data2[index].orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
       <td></td>
     </tr>
     

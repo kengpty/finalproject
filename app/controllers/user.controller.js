@@ -1,24 +1,14 @@
-// exports.login = function(req,res){
-//     User.find({'userID': req.body.userID,'password':req.body.password},(err, data) => {
-//     if(data[0]!=null){
-//         if(req.body.remember === 'remember'){
-//             req.session.remember = true;
-//             req.session.userID = req.body.userID;
-//             req.session.cookie.maxAge = 60000;
-//         }
-//         console.log(req.body);
-//         res.render('homepage1',{isLoggedIn:true});
-//     }else{res.render('homepage1',{loginSuccess:true});}
-//     });
-// };
-
+var User = require('mongoose').model('users');
+var status = require('./status.controller');
+var Transport = require('mongoose').model('transports')
+var Trucks = require('mongoose').model('trucks');
 
 exports.logout = function(req,res){
     req.logout();
     res.redirect('/');
 };
 
-var User = require('mongoose').model('users');
+
 exports.create = function(req,res,next){
     var user = new User({
     userID:req.body.userID,
@@ -86,7 +76,14 @@ exports.signup = function(req,res,next){
     // console.log(req.user);
 };
 
-exports.transport = function(req,res){
+
+
+exports.cancel = function(req,res){
+    console.log(req.query)
+    // Transport.findOneAndDelete({'orderNo':req.query.order},(err,data)=>{
+    //     console.log("cancel success")
+    //     Trucks.findOneAndUpdate({}) 
+    // })
     
-    res.redirect('/');
+    
 };
