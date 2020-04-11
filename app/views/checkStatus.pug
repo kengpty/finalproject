@@ -8,6 +8,18 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
+  style.
+    .nodata
+    {
+      margin: 0 ;
+      position: absolute ;
+      top:20%;
+      left: 50% ;
+      margin-right: -50% ;
+      transform: translate(-50%, -50%) ;
+     
+    }
+
 <body>
 <nav class="navbar navbar-inverse navbar-expand-sm" >
   <div class="container-fluid">
@@ -27,30 +39,7 @@
             <p align="center"><a class="dropdown-item modal-fade" data-toggle="modal" data-target="#a3" href="">รถบรรทุก10ล้อ</a>
             
         </div>
-        //- <div class="modal" id="a1">
-        //-         <div class="modal-dialog modal-lg">
-        //-           <div class="modal-content">
-        //-             <div class="modal-header">
-        //-             <h1 class="modal-title">ชนิดของรถบรรทุก 4 ล้อ </h1>
-        //-             <button type="button" class="close" data-dismiss="modal">&times;</button>
-        //-             </div>
-        //-               <div class="modal-body text-center" >
-        //-                 <img class="img-responsive" src="http://hps-trade.co.th/wp-content/uploads/2018/09/4w-e1539301073294.png" border="0">
-        //-               </div>
-        //-               <div class="modal-body text-left">
-        //-                 <h1>รถบรรทุก 4 ล้อตู้ทึบ</h1>
-        //-                 <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 4 ล้อ หรือ รถบรรทุกที่เรียกว่ารถปิคอัพ รถชนิดนี้จะเหมาะกับสินค้า ที่มีน้ำหนักไม่เกิน 1 ตัน และมีขนาดไม่เกิน 2 Pallet โดยรถบรรทุกชนิดนี้มีราคาที่ถูกที่สุด
-        //-                 <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
-        //-                   <li>กว้าง : 1 เมตร</li>
-        //-                   <li>ยาว  : 2.2 เมตร </li>
-        //-                   <li>สูง   : 1 เมตร </li>
-        //-                   <li>น้ำหนักบรรทุกสูงสุด  : 1.2 ตัน </li>
-        //-                 </ul>
-        //-                 <hr>
-        //-               </div>
-        //-           </div>
-        //-         </div>
-        //- </div>
+        
         <div class="modal" id="a2">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
@@ -193,53 +182,59 @@
 </div>
 <h2 align="center"> เช็คสถานะการขนส่งของคุณ #{username}
 <hr>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">หมายเลขออเดอร์</th>
-      <th scope="col">รุ่นรถบรรทุก</th>
-      <th scope="col">หมายเลขทะเบียนรถ</th>
-      <th scope="col">สถานะการขนส่ง</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
+if singleTruck
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">หมายเลขออเดอร์</th>
+        <th class="text-center" scope="col">รุ่นรถบรรทุก</th>
+        <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
+        <th class="text-center" scope="col">จำนวนพาเลท</th>
+        <th class="text-center" scope="col">สถานะการขนส่ง</th>
+        <th class="text-center" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    each a in data1
+      <tr>
+        <th class="text-center"scope="row">#{a.orderNo}</th>
+        <td class="text-center">#{a.truckType}</td>
+        <td class="text-center">#{a.licensePlate}</td>
+        <td class="text-center">#{a.qty}</td>
+        <td class="text-center">#{a.status}</td>
+        <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{a.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+      </tr>
+    
+      </tbody>
+
+  </table>
+if multiTruck
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">หมายเลขออเดอร์</th>
+        <th class="text-center" scope="col">รุ่นรถบรรทุก</th>
+        <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
+        <th class="text-center" scope="col">จำนวนพาเลท</th>
+        <th class="text-center" scope="col">สถานะการขนส่ง</th>
+        <th class="text-center" scope="col"></th>
+      </tr>
+    </thead>
   <tbody>
-  each a in data1
-    <tr>
-      <th scope="row">#{a.orderNo}</th>
-      <td>#{a.truckType}</td>
-      <td>#{a.licensePlate}</td>
-      <td>#{a.status}</td>
-       <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{a.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
-    </tr>
+    each b,index in data2
+      <tr>
+        <th class="text-center" scope="row">#{b.orderNo}</th>
+          <td class="text-center">#{jsonarraytype[index]}</td>
+          <td class="text-center">#{jsonarraylicense[index]}</td>
+          <td class="text-center">#{b.qty}</td>
+          <td class="text-center">#{b.status}</td>
+          <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{b.orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
+      
+      </tr>
   
-    </tbody>
-   
-</table>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">หมายเลขออเดอร์</th>
-      <th scope="col">รุ่นรถบรรทุก</th>
-      <th scope="col">หมายเลขทะเบียนรถ</th>
-      <th scope="col">สถานะการขนส่ง</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-<tbody>
-  each b,index in data2json
-    - var count = 0
-    - count=count+1
-    <tr>
-      <th scope="row">#{data2[index].orderNo}</th>
-      <td>#{b[index].type},<br>#{b[count].type}</td>
-      <td>#{b[0].licensePlate},<br>#{b[count].licensePlate}</td>
-      <td>#{data2[index].status}</td>
-      <td class="text-center"><a class='btn btn-info btn-xs' href="/cancel?order=#{data2[index].orderNo}" span class="glyphicon glyphicon-remove"></span>ยกเลิก</a>
-      <td></td>
-    </tr>
     
-    
-  
-</tbody>
-</table>
+  </tbody>
+  </table>
+if nomoreData
+ <div class="nodata" >ไม่มีข้อมูล</div>
+ 

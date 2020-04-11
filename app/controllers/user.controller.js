@@ -78,12 +78,3 @@ exports.signup = function(req,res,next){
 
 
 
-exports.cancel = function(req,res){
-    console.log(req.query)
-    // Transport.findOneAndDelete({'orderNo':req.query.order},(err,data)=>{
-    //     console.log("cancel success")
-    //     Trucks.findOneAndUpdate({}) 
-    // })
-    
-    
-};

@@ -14,7 +14,7 @@ module.exports = function(app){
     app.route('/user').post(user.create).get(user.list);
     app.route('/user/:username').get(user.read);
     app.param('username',user.userByUsername)
-    app.get('/cancel/',user.cancel)
+    
 };
 
 

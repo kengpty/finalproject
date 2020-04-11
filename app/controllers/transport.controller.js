@@ -110,6 +110,8 @@ exports.getOrder= function(req,res){
                 // กรณีรถใหญ่เต็ม
                 if(data[0]==undefined){
                     Trucks.find({$and:[{'pallet':{$lte:minPallet}},{'status':'ready'}]},(err, data)=>{
+                        var AlldataLicensePlate=[]
+                        var AlldataTruckType=[]
                         var countQTY=0
                         var count =0
                         //truckForUse เก็บข้อมูลรถคันเล็กที่ใช้
@@ -129,6 +131,13 @@ exports.getOrder= function(req,res){
                                 count++
                                
                             }
+                            for(let dataLicensePlate=0;dataLicensePlate<truckForUse.length;dataLicensePlate++){
+                                AlldataLicensePlate[dataLicensePlate]=truckForUse[dataLicensePlate][0]
+                                AlldataTruckType[dataLicensePlate]=truckForUse[dataLicensePlate][1]
+                            }
+                            // console.log(AlldataLicensePlate)
+                            var jsonDataLicensePlate = JSON.stringify(AlldataLicensePlate)
+                            var jsonDataTruckType = JSON.stringify(AlldataTruckType)
                             // var json = JSON.parse(truckForUse)
                             var json = JSON.stringify(truckForUse)
                             // var a=JSON.parse(json.licensePlate)
@@ -139,10 +148,8 @@ exports.getOrder= function(req,res){
                                 fullname: req.body.username,
                                 palletsize:req.body.palletSize,
                                 qty:Qty,
-                                tel:req.body.tel,
-                                // licensePlate:JSON.stringify(truckForUse),
-                                licensePlate:json,
-                                // truckType:truckTypeForUse[0],
+                                tel:req.body.tel,licensePlate:jsonDataLicensePlate,
+                                truckType:jsonDataTruckType,
                                 address1:req.body.address1,
                                 address2:req.body.address2
                             })
@@ -170,12 +177,7 @@ exports.getOrder= function(req,res){
                        
     
                         }  
-                        //ดึงดาต้าเบสแบบarrayมาเป็นjson
-                        // Transport.find({$and:[{'orderNo':6},{'userID':'test'}]},(err, data)=>{
-                        //    console.log(data[0]. licensePlate)
-                        //    var obj = JSON.parse(data[0]. licensePlate)
-                        //    console.log(obj[0].licensePlate)
-                        // })
+                  
                        
                         
                     })
@@ -187,6 +189,8 @@ exports.getOrder= function(req,res){
        
         order.findOne({},(err,orderdata)=>{
             Trucks.find({$and:[{'pallet':{$lte:maxPallet}},{'status':'ready'}]},(err, data)=>{
+                var AlldataLicensePlate=[]
+                var AlldataTruckType=[]
                 var countQTY=0
                 var count =0
                 var truckForUse=[]
@@ -195,16 +199,23 @@ exports.getOrder= function(req,res){
                         if(data[i]==undefined){
                             return  res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
                         }
-                        truckForUse.push({licensePlate:data[i].licensePlate,type:data[i].type})  
+                        // truckForUse.push({licensePlate:data[i].licensePlate,type:data[i].type})  
                         // truckTypeForUse.push({type:data[i].type}) 
-                        // truckForUse[i]=data[i].licensePlate
+                        truckForUse[i]=[data[i].licensePlate,data[i].type]
                         
                         countQTY+=data[i].pallet
                         count++
                        
                     }
-                    var json = JSON.stringify(truckForUse)
-
+                    // var json = JSON.stringify(truckForUse)
+                   
+                    for(let dataLicensePlate=0;dataLicensePlate<truckForUse.length;dataLicensePlate++){
+                        AlldataLicensePlate[dataLicensePlate]=truckForUse[dataLicensePlate][0]
+                        AlldataTruckType[dataLicensePlate]=truckForUse[dataLicensePlate][1]
+                    }
+                    // console.log(AlldataLicensePlate)
+                    var jsonDataLicensePlate = JSON.stringify(AlldataLicensePlate)
+                    var jsonDataTruckType = JSON.stringify(AlldataTruckType)
                     var transports = new Transport({
                         transportType:2,
                         orderNo:orderdata.orderNo,
@@ -213,9 +224,8 @@ exports.getOrder= function(req,res){
                         palletsize:req.body.palletSize,
                         qty:Qty,
                         tel:req.body.tel,
-                        // licensePlate:JSON.stringify(truckForUse),
-                        licensePlate:json,
-                        // truckType:truckTypeForUse[0],
+                        licensePlate:jsonDataLicensePlate,
+                        truckType:jsonDataTruckType,
                         address1:req.body.address1,
                         address2:req.body.address2
                     })
@@ -241,7 +251,7 @@ exports.getOrder= function(req,res){
                 if(data[0]==undefined){
                     res.render('transport',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',tel: req.user ? req.user.tel : '',truckNotAvailable:true})
                 }
-               
+                
             })
 
 
