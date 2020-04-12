@@ -18,18 +18,20 @@ exports.checkStatus = function(req,res){
             if(data2[0]!=undefined){
                 if(data1[0]!=undefined){
                     res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',jsonarraytype,jsonarraylicense,data1:data1,data2:data2,singleTruck:true,multiTruck:true})
-                    }else if(data1[0]==undefined){
-                        res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',data2:data2,multiTruck:true})
                     }
-               
+                if(data1[0]==undefined){
+                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',jsonarraytype,jsonarraylicense,data2:data2,multiTruck:true})
                 }
+               
+            }
             
             if(data2[0]==undefined){
                 if(data1[0]!=undefined){
                     res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',data1:data1,singleTruck:true})
-                    }else if(data1[0]==undefined){
-                        res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',nomoreData:true})
                     }
+                if(data1[0]==undefined){
+                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',nomoreData:true})
+                }
             }
         })
     })
@@ -56,25 +58,21 @@ exports.cancel = function(req,res){
         // console.log(data)
         // Trucks.findOneAndUpdate({}) 
         if(data.transportType==2){
-            // var testdata={}
-            // for(let i=0;i<=10;i++){
-            //     var obj = JSON.parse(data[i].licensePlate)
-            //     testdata[i]=obj
-            //     if(data2[i+1]==undefined){
-            //         break
-            //     }
-            // }    
-            var obj = JSON.parse(data.licensePlate)
-            console.log(obj)
-            // Trucks.findOneAndUpdate({"licensePlate":data.licensePlate}, {$set: {"status":"ready"}}, {upsert: true}, function(err,doc) {
-            //     if (err) { throw err; }
-            //     else { console.log("Updated"); }
-            // }); 
-            // Transport.findOneAndDelete({'orderNo':req.query.order},(err,data)=>{
-            //     if (err) { throw err; }
-            //     else { console.log("deleted"); }
-            // })
-            // res.redirect('/checkStatus',)
+            var objTruck = JSON.parse(data.licensePlate)
+            console.log(objTruck.length)
+            for(let i=0;i<objTruck.length;i++){
+                // console.log(objTruck[i])
+                Trucks.findOneAndUpdate({"licensePlate":objTruck[i]}, {$set: {"status":"ready"}}, {upsert: true}, function(err,doc) {
+                    if (err) { throw err; }
+                    // else { console.log("Updated"); }
+                }); 
+            }
+            Transport.findOneAndDelete({'orderNo':req.query.order},(err,data)=>{
+                if (err) { throw err; }
+                // else { console.log("deleted"); }
+            })
+            res.redirect('/checkStatus',)
+          
         }
     })
     

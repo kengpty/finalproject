@@ -7,6 +7,31 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+<!------------------------------------------------>
+head
+    
+    style.
+     .TruckStatus{
+            margin: 0 ;
+            position: absolute ;
+            top: 50% ;
+            left: 50% ;
+            margin-right: -50% ;
+            transform: translate(-50%, -50%) ;
+            border-width:5px;  
+            border-style:dotted;
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            font-size: 150%;
+            
+        }
+        .date{
+          color: blue;
+        }
+
+<!------------------------------------------------>
 
 <body>
 <nav class="navbar navbar-inverse navbar-expand-sm " >
@@ -192,3 +217,25 @@
 
 </div>
 
+<div class="TruckStatus">
+  <h1 class='center'><span> สถานะของรถบรรทุกประจำวันที่ </span><span class='date'>#{date}-#{month}-#{year} </span></h1>
+  <table class="table">
+  <thead>
+    <tr>
+      <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
+      <th class="text-center" scope="col">รุ่นรถบรรทุก</th>
+      <th class="text-center" scope="col">สถานะ</th>
+    </tr>
+  </thead>
+  <tbody>
+    each a in indexdata
+      <tr>
+        <th class="text-center"scope="row">#{a.licensePlate}</th>
+        <td class="text-center">#{a.type}</td>
+        <td class="text-center">#{a.status}</td>
+        </tr>
+    
+      </tbody>
+
+  </table>
+</div>
