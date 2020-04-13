@@ -32,7 +32,7 @@ module.exports = function(){
     app.set('views','./app/views');
     app.set('view engine','pug');
 
-
+    require('../app/routes/driver.route')(app);
     require('../app/routes/admin.route')(app);
     require('../app/routes/index.routes')(app);
     require('../app/routes/user.routes')(app);

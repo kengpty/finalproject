@@ -23,6 +23,16 @@ head
             padding-right: 10px;
             padding-bottom: 10px;
             padding-left: 10px;
+            background-color: white;
+        }
+        .container{
+            margin: 0 ;
+            position: relative ;
+            margin-right: -50% ;
+            transform: translate(-50%, -50%) ;
+            top: 20% ;
+            left: 50% ;
+            
             
         }
         .button{
@@ -40,39 +50,56 @@ head
         .button_ID{
             text-align: center; 
         }
-        
+        body{
+            
+            background-color: black;
+        }
+        .Logo{
+            text-align: center;  
+            margin: 0 ;
+            position: absolute ;
+            top: 30% ;
+            left: 50% ;
+            margin-right: -50% ;
+            transform: translate(-50%, -50%) ;
+            
+        }
 
 
 
 <!------------>
-
-
-<div class="container4" >
- 
-
-    <form class="box" name="login" action="/admin/login" method=post>
-    <div class="box_ID">
-          <label for="inputID">ID</label>
-          <input type="text" name="ID"  required>
+<body>
+    <div class="Logo">
+        
+        img(src="logo.png" alt='logo' height="220" )
+        
     </div>
-    <div>
-          <label for="inputID">password</label>
-          <input type="password" name="Password" placeholder="รหัสผ่าน" required>
-    </div>
-    <br>
-    <div class="button_ID">
-    <input class="button" type=submit value="เข้าสู่ระบบ" >
-    </div>
-          
+    <div class="container4" >
+    
+        
+        <form class="box" name="login" action="/admin/login" method=post>
+        <div class="box_ID">
+            <label for="inputID">ID</label>
+            <input type="text" name="ID"  required>
+        </div>
+        <div>
+            <label for="inputID">password</label>
+            <input type="password" name="Password" placeholder="รหัสผ่าน" required>
+        </div>
+        <br>
+        <div class="button_ID">
+        <input class="button" type=submit value="เข้าสู่ระบบ" >
+        </div>
+            
 
-</div>
-
-<div class="container">
-if loginFail
-    <div class="alert alert-danger" role="alert" id="fail-alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <strong>ผิดพลาด!</strong> username หรือ passwordไม่ถูกต้อง
     </div>
 
-</div>
+    <div class="container">
+    if loginFail
+        <div class="alert alert-danger" role="alert" id="fail-alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>ผิดพลาด!</strong> username หรือ passwordไม่ถูกต้อง
+        </div>
 
+    </div>
+</body>

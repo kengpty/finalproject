@@ -9,5 +9,6 @@ module.exports = function(){
     require('../app/models/transport.model')
     require('../app/models/CountOrder.model')
     require('../app/models/admin.model')
+    require('../app/models/driver.model')
     return db;
 }

@@ -17,17 +17,17 @@ exports.checkStatus = function(req,res){
             
             if(data2[0]!=undefined){
                 if(data1[0]!=undefined){
-                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',jsonarraytype,jsonarraylicense,data1:data1,data2:data2,singleTruck:true,multiTruck:true})
+                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',haveData:true,jsonarraytype,jsonarraylicense,data1:data1,data2:data2,singleTruck:true,multiTruck:true})
                     }
                 if(data1[0]==undefined){
-                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',jsonarraytype,jsonarraylicense,data2:data2,multiTruck:true})
+                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',haveData:true,jsonarraytype,jsonarraylicense,data2:data2,multiTruck:true})
                 }
                
             }
             
             if(data2[0]==undefined){
                 if(data1[0]!=undefined){
-                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',data1:data1,singleTruck:true})
+                    res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',haveData:true,data1:data1,singleTruck:true})
                     }
                 if(data1[0]==undefined){
                     res.render('checkStatus',{username: req.user ? req.user.fullname : '',userID: req.user ? req.user.userID : '',nomoreData:true})
