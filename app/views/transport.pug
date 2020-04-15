@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
+  //- style.
+  //-   #blockTransport 
+  //-   {
+  //-   background-color: rgb(228, 217, 218);
+  //-   }
+
 <body>
 <nav class="navbar navbar-inverse navbar-expand-sm" >
   <div class="container-fluid">
@@ -190,79 +196,80 @@
     </div>                    
 </div>
 
-<h2 align="center"> ยินดีต้อนรับคุณ #{username}
-<div>
-  if truckNotAvailable
-    <div class="alert alert-danger alert-dismissible p-3 my-3 border">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>ไม่สำเร็จ!</strong>ขณะนี้รถบรรทุกไม่พร้อมใช้งาน
-</div>
-</div>
- 
-<hr>
-<form name="transport" action="/transport" method=post>
-  <div class="container p-3 my-3 border">
-      <div class="form-row">
-        <div class="form-group col">
-            
-            <select name="palletSize" required >
-              <option value="">เลือกขนาดพาเลท</option>
-              <option value="Euro_Pallet">ขนาด 80 x 120 x 1.5 cm. (EURO Pallet)</option>
-              <option value="Japan_Pallet">ขนาด 110 x 110 x 1.5 cm. (Japan Pallet)</option>
-              <option value="Thai_Pallet">ขนาด 100 x 120 x 1.5 cm. (Thai Pallet)</option>
-            </select>
-        </div>
-        <div class="form-group col">
-          <label for="Qty">จำนวน</label>
-          <input type="text" name="Qty" placeholder="โปรดระบุจำนวนพาเลท" required pattern="[0-9]{0,2}"title="โปรดระบุจำนวนเป็นตัวเลข">
-        
-        </div>
-      </div>
-  </div> 
-  <div class="container p-3">
-      <div class="form-row ">
-        <div class="form-group ">
-          <label for="userID" >ID ชื่อผู้ใช้งาน</label>
-          <select name="userID" >
-              <option value="#{userID}">#{userID}</option>
-          </select>
-        </div>
-      </div>
-      
-      <div class="form-row ">
-        <div class="form-group ">
-          <label for="username">ชื่อผู้ใช้งาน</label>
-          <select name="username" >
-              <option value="#{username}">#{username}</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row ">
-        <div class="form-group ">
-          <label for="tel" >เบอร์โทร</label>
-          <select name="tel" >
-              <option value="#{tel}">#{tel}</option>
-          </select>
-        </div>
-      </div>
-
-     
-      <div class="form-group form-row">
-        <label for="address1">ที่อยู่โกดังที่รับของ</label>
-        <textarea cols="30", rows="4" type="text" name="address1" ></textarea>
-        
-      </div>
-     
-      
-      <div class="form-group form-row">
-        <label for="address1">ที่อยู่โกดังที่ส่งของ</label>
-        <textarea cols="30", rows="4" type="text" name="address2" ></textarea>
-        
-      </div>
-      
+<body>
+  <h2 align="center" id="blockTransport"> ยินดีต้อนรับคุณ #{username}
+  <div>
+    if truckNotAvailable
+      <div class="alert alert-danger alert-dismissible p-3 my-3 border">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>ไม่สำเร็จ!</strong>ขณะนี้รถบรรทุกไม่พร้อมใช้งาน
   </div>
-  <input type=submit value="ยืนยันการขนส่ง">
+  </div>
   
-</form>
+  <hr>
+  <form name="transport" action="/transport" method=post>
+    <div class="container p-3 my-3 border">
+        <div class="form-row">
+          <div class="form-group col">
+              
+              <select name="palletSize" required >
+                <option value="">เลือกขนาดพาเลท</option>
+                <option value="Euro_Pallet">ขนาด 80 x 120 x 1.5 cm. (EURO Pallet)</option>
+                <option value="Japan_Pallet">ขนาด 110 x 110 x 1.5 cm. (Japan Pallet)</option>
+                <option value="Thai_Pallet">ขนาด 100 x 120 x 1.5 cm. (Thai Pallet)</option>
+              </select>
+          </div>
+          <div class="form-group col">
+            <label for="Qty">จำนวน</label>
+            <input type="text" name="Qty" placeholder="โปรดระบุจำนวนพาเลท" required pattern="[0-9]{0,2}"title="โปรดระบุจำนวนเป็นตัวเลข">
           
+          </div>
+        </div>
+    </div> 
+    <div class="container p-3">
+        <div class="form-row ">
+          <div class="form-group ">
+            <label for="userID" >ID ชื่อผู้ใช้งาน</label>
+            <select name="userID" >
+                <option value="#{userID}">#{userID}</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row ">
+          <div class="form-group ">
+            <label for="username">ชื่อผู้ใช้งาน</label>
+            <select name="username" >
+                <option value="#{username}">#{username}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row ">
+          <div class="form-group ">
+            <label for="tel" >เบอร์โทร</label>
+            <select name="tel" >
+                <option value="#{tel}">#{tel}</option>
+            </select>
+          </div>
+        </div>
+
+      
+        <div class="form-group form-row">
+          <label for="address1">ที่อยู่โกดังที่รับของ</label>
+          <textarea cols="30", rows="4" type="text" name="address1" ></textarea>
+          
+        </div>
+      
+        
+        <div class="form-group form-row">
+          <label for="address1">ที่อยู่โกดังที่ส่งของ</label>
+          <textarea cols="30", rows="4" type="text" name="address2" ></textarea>
+          
+        </div>
+        
+    </div>
+    <input type=submit value="ยืนยันการขนส่ง">
+    
+  </form>
+</body>

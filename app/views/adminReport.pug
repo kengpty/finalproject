@@ -1,45 +1,98 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+//- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+</head>
 <!------ Include the above in your HEAD tag ---------->
 style.
-    .nodata
-    {
-      margin: 0 ;
-      position: absolute ;
-      top:20%;
-      left: 50% ;
-      margin-right: -50% ;
-      transform: translate(-50%, -50%) ;
-     
+    .noData{
+      padding-top:40px;
+      font-size:25px;
     }
 
     .licensePlateColumn
     {
      width: 20;
     }
+    .sidenav {
+    height: 100%;
+    width: 17%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    
+    }
+
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    .tableHeader{
+      font-size: 50px;
+      padding-left:50%;
+      padding-top:1%;
+    }
+    .table-responsive{
+     margin-top: -1.5% ;
+      
+    }
+    .reportBox{
+    overflow-x:auto;
+    margin-left:21%;
+    }
 
 <!---------------------------------------------------->
 
+<div class="sidenav">
+  <div class="sidebar-header">
+            <h3>การจัดการ</h3>
+  </div>
+  <ul>
+    <li class="active"><a href="/admin/report?link=0">ข้อมูลออเดอร์ทั้งหมด</a></li>
+    <li><a href="/admin/report?link=1">ออเดอร์ที่รอการอนุมัติ</a></li>
+    <li><a href="/admin/report?link=2">ออเดอร์ที่ได้รับการอนุมัติ</a></li>
+    <li><a href="/admin/report?link=3">ออเดอร์ที่กำลังไปรับของ</a></li>
+    <li><a href="/admin/report?link=4">ออเดอร์ที่กำลังขนส่ง</a></li>
+    <li><a href="/admin/report?link=5">ออเดอร์ที่เสร็จสิ้น</a></li>
+  </ul>
+</div>
 
 
+<div class="tableHeader">
+    <h1>#{textHeader}</h1>
+</div>
 if nomoreData
-    <div class="nodata" >ขณะนี้ไม่มีข้อมูลการจัดส่งในระบบ</div>
+  <div class='tableHeader'><p class='noData'>ขณะนี้ไม่มีข้อมูลการจัดส่งในระบบ</p></div>
 
 <div class="table-responsive">
-  <div class="container" >
+  <div class="reportBox" >
     if haveData
-      <div class="row col-md-13 col-md-offset-0 " >
+      <div class="row col-md-13 col-md-offset-2 " >
+        
         <table class="table table-striped " style="border: 1px solid #ccc;  padding: 5px; margin: 5% 0; box-shadow: 3px 3px 2px #ccc; transition: 0.5s;">
         <thead>
             <tr>
                 <th class="text-center" scope="col">หมายเลขออเดอร์</th>
                 <th class="text-center" scope="col">รุ่นรถบรรทุก</th>
                 <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
-                <th class="text-nowrap" scope="col">จำนวนพาเลท</th>
-                <th class="text-nowrap" scope="col">สถานะการขนส่ง</th>
-                <th class="text-nowrap">แก้ไข</th>
+                <th class="text-center" scope="col">จำนวนพาเลท</th>
+                <th class="text-center" scope="col">สถานะการขนส่ง</th>
+                <th class="text-center">แก้ไข</th>
             </tr>
         </thead>
       <tbody>

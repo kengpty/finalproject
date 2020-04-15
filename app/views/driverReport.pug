@@ -7,15 +7,14 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
-
 <!------ Include the above in your HEAD tag ---------->
-head  
-    style.
-        .title{
-            margin-top: 15px ;
-            font-weight: bold ;
-        }
-        .report{
+style.
+    .noData{
+      padding-top:40px;
+      font-size:25px;
+    }
+
+    .report{
             margin: 0 ;
             position: absolute ;
             top: 20% ;
@@ -31,58 +30,52 @@ head
             font-size:20px;
             border-radius: 12px;
         }
-        .noData{
-        padding-top:40px;
-        font-size:25px;
-        }
+    .sidenav {
+    height: 100%;
+    width: 17%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    
+    }
 
-        .licensePlateColumn
-        {
-        width: 20;
-        }
-        .sidenav {
-        height: 100%;
-        width: 17%;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 20px;
-        
-        }
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
 
-        .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        }
-
-        .sidenav a:hover {
-        color: #f1f1f1;
-        }
-        .tableHeader{
-        font-size: 50px;
-        padding-left:50%;
-        padding-top:1%;
-        }
-        .table-responsive{
-        margin-top: -1.5% ;
-        
-        }
-        .reportBox{
-        overflow-x:auto;
-        margin-left:21%;
-        }
-        .adminSubmit{
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    .tableHeader{
+      font-size: 50px;
+      padding-left:50%;
+      padding-top:1%;
+    }
+    .table-responsive{
+     margin-top: -1.5% ;
+      
+    }
+    .reportBox{
+    overflow-x:auto;
+    margin-left:21%;
+    }
+    .orderHeader{
+    font-size: 30px;
+      padding-left:40%;
+      padding-top:2%;
+    }
+    .adminSubmit{
         margin-left:35%;
         }
-        .statusActive{
-        color:green;
-        }
+
 <!---------------------------------------------------->
 
 <div class="sidenav">
@@ -90,17 +83,25 @@ head
             <h3>การจัดการ</h3>
   </div>
   <ul>
-    <li class="active"><a href="/admin/report?link=0">ข้อมูลออเดอร์ทั้งหมด</a></li>
-    <li><a href="/admin/report?link=1">ออเดอร์ที่รอการอนุมัติ</a></li>
-    <li><a href="/admin/report?link=2">ออเดอร์ที่ได้รับการอนุมัติ</a></li>
-    <li><a href="/admin/report?link=3">ออเดอร์ที่กำลังไปรับของ</a></li>
-    <li><a href="/admin/report?link=4">ออเดอร์ที่กำลังขนส่ง</a></li>
-    <li><a href="/admin/report?link=5">ออเดอร์ที่เสร็จสิ้น</a></li>
+    <li class="active"><a href="/admin/report">ค้นหาออเดอร์</a></li>
+    
   </ul>
 </div>
 
+<form action="/driver/find" method=post>
+    <div class="orderHeader">
+        <label for="orderNo">หมายเลขออเดอร์ : </label>
+        <input type="text" id="orderNo" name="orderNo">
+        <button type="submit">Submit</button>
+    </div>
+
+</form>
+
+
+
+
 if transportType1
-    <form action="/admin/edit?order=#{data.orderNo}" method=post>
+    <form action="/driver/edit?order=#{data.orderNo}" method=post>
         <div class='report'>
             <p><span class='title'> หมายเลขออเดอร์ : </span><span>#{data.orderNo}</span></p>
             <p><span class='title'> userID : </span><span>#{data.userID}</span></p>
@@ -113,53 +114,14 @@ if transportType1
             <p><span class='title'> ทะเบียนรถ : </span><span>#{data.licensePlate}</span></p>
             <p><span class='title'> วัน/เดือน/ปี : </span><span>#{data.time}</span></p>
             
-            if status1
-                <p><span class='title'> สถานะ : </span>
-                <select name="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status2
-                <p><span class='title'> สถานะ : </span>
-                <select name="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status3
-                <p><span class='title'> สถานะ : </span>
-                <select name="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status4
-                <p><span class='title'> สถานะ : </span>
-                <select name="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status5
-                <p><span class='title'> สถานะ : </span>
-                <select name="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                </select><p class="adminSubmit">
             
-            <input type=submit value="ยืนยันการขนส่ง"></p>
+            <p><span class='title'> สถานะ : </span>
+            <select name="status">
+                <option value="กำลังไปรับของ">กำลังไปรับของ</option>
+                <option value="กำลังขนส่ง">กำลังขนส่ง</option>
+                <option value="เสร็จสิ้น">เสร็จสิ้น</option>
+            </select><p class="adminSubmit">
+            <input type=submit value="อัพเดทสถานะการขนส่ง"></p>
         </div>
     </form>
 if transportType2
