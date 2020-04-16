@@ -321,6 +321,7 @@ exports.del = function(req,res){
 }
 
 exports.postedit = function(req,res){
+    console.log(req.body)
     Transport.findOneAndUpdate({'orderNo':req.query.order}, {$set: {"status":req.body.status}}, {upsert: true}, function(err,doc) {
         if (err) { throw err; }
         // else { console.log("Updated"); }

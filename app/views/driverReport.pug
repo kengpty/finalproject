@@ -11,6 +11,7 @@
 style.
     .noData{
       padding-top:40px;
+      
       font-size:25px;
     }
 
@@ -83,8 +84,10 @@ style.
             <h3>การจัดการ</h3>
   </div>
   <ul>
-    <li class="active"><a href="/admin/report">ค้นหาออเดอร์</a></li>
-    
+    <li class="active"><a href="/driver/report">ค้นหาออเดอร์</a></li>
+    <li class="active"><a href="/driver/all">ออเดอร์ที่ได้รับการยืนยัน</a></li>
+    <li class="active"><a href="/driver/pickup">ออเดอร์ที่กำลังไปรับของ</a></li>
+    <li class="active"><a href="/driver/transport">ออเดอร์ที่กำลังขนส่ง</a></li>
   </ul>
 </div>
 
@@ -92,12 +95,56 @@ style.
     <div class="orderHeader">
         <label for="orderNo">หมายเลขออเดอร์ : </label>
         <input type="text" id="orderNo" name="orderNo">
-        <button type="submit">Submit</button>
+        <button type="submit">ค้นหา</button>
     </div>
-
 </form>
+if nomoreData
+  <div class='tableHeader'><p class='noData'>ไม่มีข้อมูลในระบบหรือadminยังไม่ได้ยืนยันออเดอร์</p></div>
 
-
+<div class="table-responsive">
+  <div class="reportBox" >
+    if haveData
+      <div class="row col-md-13 col-md-offset-2 " >
+        
+        <table class="table table-striped " style="border: 1px solid #ccc;  padding: 5px; margin: 5% 0; box-shadow: 3px 3px 2px #ccc; transition: 0.5s;">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">หมายเลขออเดอร์</th>
+                <th class="text-center" scope="col">รุ่นรถบรรทุก</th>
+                <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
+                <th class="text-center" scope="col">จำนวนพาเลท</th>
+                <th class="text-center" scope="col">สถานะการขนส่ง</th>
+                <th class="text-center">แก้ไข</th>
+            </tr>
+        </thead>
+      <tbody>
+      if singleTruck
+        each a in data1
+            <tr>
+                <th class="text-center"scope="row">#{a.orderNo}</th>
+                <td class="text-center">#{a.truckType}</td>
+                <td class="text-center">#{a.licensePlate}</td>
+                <td class="text-center">#{a.qty}</td>
+                <td class="text-center">#{a.status}</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="/driver/find?order=#{a.orderNo}" span class="glyphicon glyphicon-edit"></span> อัพเดทสถานะการขนส่ง</a></td>
+            </tr>
+      if multiTruck
+        each b,index in data2
+          <tr>
+            <th class="text-center" scope="row">#{b.orderNo}</th>
+              <td class="text-center">#{jsonarraytype[index]}</td>
+              <td class="text-center">#{jsonarraylicense[index]}</td>
+              <td class="text-center">#{b.qty}</td>
+              <td class="text-center">#{b.status}</td>
+              <td class="text-center"><a class='btn btn-info btn-xs' href="/driver/find?order=#{b.orderNo}" span class="glyphicon glyphicon-remove"></span>อัพเดทสถานะการขนส่ง</a> 
+          
+          </tr>
+      </tbody>
+      </table>
+    </div>
+  
+  </div>
+</div>  
 
 
 if transportType1
@@ -107,8 +154,8 @@ if transportType1
             <p><span class='title'> userID : </span><span>#{data.userID}</span></p>
             <p><span class='title'> ชื่อ-นามสกุล : </span><span>#{data.fullname}</span></p>
             <p><span class='title'> เบอร์โทร : </span><span>#{data.tel}</span></p>
-            <p><span class='title'> ที่อยู่1 : </span><span>#{data.address1}</span></p>
-            <p><span class='title'> ที่อยู่2 : </span><span>#{data.address2}</span></p>
+            <p><span class='title'> ที่อยู่1 : </span><span>#{data.address1}</span><span><a href="https://www.google.co.th/maps/place/#{data.address1}" target="_blank"> ดูเส้นทาง</a></span></p>
+            <p><span class='title'> ที่อยู่2 : </span><span>#{data.address2}</span><a href="https://www.google.co.th/maps/place/#{data.address2}" target="_blank"> ดูเส้นทาง</a></span></p>
             <p><span class='title'> ชนิดของพาเลท : </span><span>#{data.palletsize}</span><span class='title'>&nbsp; จำนวน :</span><span> #{data.qty} </span></p>
             <p><span class='title'> รุ่นของรถบรรทุก : </span><span>#{data.truckType}</span></p>
             <p><span class='title'> ทะเบียนรถ : </span><span>#{data.licensePlate}</span></p>
@@ -117,6 +164,7 @@ if transportType1
             
             <p><span class='title'> สถานะ : </span>
             <select name="status">
+                <option value=#{data.status}>#{data.status}</option>
                 <option value="กำลังไปรับของ">กำลังไปรับของ</option>
                 <option value="กำลังขนส่ง">กำลังขนส่ง</option>
                 <option value="เสร็จสิ้น">เสร็จสิ้น</option>
@@ -125,58 +173,25 @@ if transportType1
         </div>
     </form>
 if transportType2
-    <form action="/admin/edit?order=#{data.orderNo}" method=post>
+    <form action="/driver/edit?order=#{data.orderNo}" method=post>
         <div class='report'>
             <p><span class='title'> หมายเลขออเดอร์ : </span><span>#{data.orderNo}</span></p>
             <p><span class='title'> userID : </span><span>#{data.userID}</span></p>
             <p><span class='title'> ชื่อ-นามสกุล : </span><span>#{data.fullname}</span></p>
             <p><span class='title'> เบอร์โทร : </span><span>#{data.tel}</span></p>
-            <p><span class='title'> ที่อยู่1 : </span><span>#{data.address1}</span></p>
-            <p><span class='title'> ที่อยู่2 : </span><span>#{data.address2}</span></p>
+            <p><span class='title'> ที่อยู่1 : </span><span>#{data.address1}</span><span><a href="https://www.google.co.th/maps/place/#{data.address1}" target="_blank"> ดูเส้นทาง</a></span></p>
+            <p><span class='title'> ที่อยู่2 : </span><span>#{data.address2}</span><span><a href="https://www.google.co.th/maps/place/"#{data.address2}"" target="_blank"> ดูเส้นทาง</a></span></p>
             <p><span class='title'> ชนิดของพาเลท : </span><span>#{data.palletsize}</span><span class='title'>&nbsp; จำนวน :</span><span> #{data.qty} </span></p>
             <p><span class='title'> รุ่นของรถบรรทุก : </span><span>#{jsonarraytype}</span></p>
             <p><span class='title'> ทะเบียนรถ : </span><span>#{jsonarraylicense}</span></p>
             <p><span class='title'> วัน/เดือน/ปี : </span><span>#{data.time}</span></p>
-            if status1
-                <p><span class='title'> สถานะ : </span><select id="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status2
-                <p><span class='title'> สถานะ : </span><select id="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status3
-                <p><span class='title'> สถานะ : </span><select id="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status4
-                <p><span class='title'> สถานะ : </span><select id="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="เสร็จสิ้น">เสร็จสิ้น</option>
-                </select><p class="adminSubmit">
-            if status5
-                <p><span class='title'> สถานะ : </span><select id="status">
-                    <option value=#{data.status}>#{data.status}</option>
-                    <option value="รอการอนุมัติ">รอการอนุมัติ</option>
-                    <option value="ได้รับการอนุมัติ">ได้รับการอนุมัติ</option>
-                    <option value="กำลังไปรับของ">กำลังไปรับของ</option>
-                    <option value="กำลังขนส่ง">กำลังขนส่ง</option>
-                </select><p class="adminSubmit">
+            <p><span class='title'> สถานะ : </span>
+            <select name="status">
+                <option value=#{data.status}>#{data.status}</option>
+                <option value="กำลังไปรับของ">กำลังไปรับของ</option>
+                <option value="กำลังขนส่ง">กำลังขนส่ง</option>
+                <option value="เสร็จสิ้น">เสร็จสิ้น</option>
+            </select><p class="adminSubmit">
             
             <input type=submit value="ยืนยันการขนส่ง"></p>
         </div>
