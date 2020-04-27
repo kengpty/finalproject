@@ -2,38 +2,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <!------------------------------------------------>
-head
+<head>
     
     style.
-     .TruckStatus{
-            margin: 0 ;
-            position: absolute ;
-            top: 50% ;
-            left: 50% ;
-            margin-right: -50% ;
-            transform: translate(-50%, -50%) ;
-            border-width:5px;  
-            border-style:dotted;
-            padding-top: 10px;
-            padding-right: 10px;
-            padding-bottom: 10px;
-            padding-left: 10px;
-            font-size: 150%;
-            
-        }
+      .TruckStatus{
+              margin: 0 ;
+              position: absolute ;
+              border-width:5px;  
+              padding-top: 10px;
+              padding-right: 10px;
+              padding-bottom: 10px;
+              padding-left: 20px;
+              font-size: 150%;
+              float: right;
+          }
         .date{
           color: blue;
         }
+        .wrapper {
+          display: block;
+          min-height: 100%; /* real browsers */
+          height: auto !important; /* real browsers */
+          height: 100%; /* IE6 bug */
+          
+        }
+        .navbar-inverse {
+          background-color: #222;
+        }
+        .addr{
+          padding-top:5%;
+          padding-left:0%;
+        }
+        .carousel{
+          float:right;
+          
+        }
+        #carousel-example-generic-truck {
+          height: 422px;
+          width: 960px;
+        }
+        .carouselTitle {
+          font-size: 64px;
+          font-weight: 100;
+          color: white;
+          text-shadow: 0 1px 2px #000;
+          position: absolute;
+          top:0px;
+          right: 0px;
+        }
+        .truck{
+         
+          height:60%;
+        }
+        .pallet-data{
+          background-color:red;
+          height:60%;
+        }
 
+</head>
 <!------------------------------------------------>
 
-<body>
+
 <nav class="navbar navbar-inverse navbar-expand-sm " >
   <div class="container-fluid">
     <div class="navbar-header">
@@ -192,31 +226,59 @@ head
     </div>
 </nav>
 
-<div class="container">
-  if loginFail
-    <div class="alert alert-danger" role="alert" id="fail-alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <strong>ผิดพลาด!</strong> username หรือ passwordไม่ถูกต้อง
-    </div>
-  if registerFail
-    <div class="alert alert-danger" role="alert" id="fail-alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <strong>ผิดพลาด!</strong> username ถูกใช้งานแล้ว
-    </div>   
-  if transpotsuccess
-    <div class="alert alert-success alert-dismissible p-3 my-3 border">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>สำเร็จ!</strong>กำลังเตรียมการขนส่งท่านสามารถคลิกเช็คสถานะการขนส่งเพื่อตรวจสอบสถานะ                 
-    </div>
+
+
+if loginFail
+  <div class="alert alert-danger" role="alert" id="fail-alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>ผิดพลาด!</strong> username หรือ passwordไม่ถูกต้อง
+  </div>
+if registerFail
+  <div class="alert alert-danger" role="alert" id="fail-alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>ผิดพลาด!</strong> username ถูกใช้งานแล้ว
+  </div>   
+if transpotsuccess
+  <div class="alert alert-success alert-dismissible p-3 my-3 border">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>สำเร็จ!</strong>กำลังเตรียมการขนส่งท่านสามารถคลิกเช็คสถานะการขนส่งเพื่อตรวจสอบสถานะ                 
+  </div>
 <div>
-  if truckNotAvailable
-    <div class="alert alert-danger alert-dismissible p-3 my-3 border">
-      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>ไม่สำเร็จ!</strong>ขณะนี้รถบรรทุกไม่พร้อมใช้งาน
-    </div>
+if truckNotAvailable
+  <div class="alert alert-danger alert-dismissible p-3 my-3 border">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>ไม่สำเร็จ!</strong>ขณะนี้รถบรรทุกไม่พร้อมใช้งาน
+  </div>
 
+
+
+<div class ="wrapper">
+<div class = "truck">
+//- carousel
+<div id="carousel-example-generic-truck" class="carousel slide" data-ride="carousel">
+<ol class="carousel-indicators">
+<li data-target="#carousel-example-generic-truck" data-slide-to="0" class="active"></li>
+<li data-target="#carousel-example-generic-truck" data-slide-to="1"></li>
+</ol>
+<div class="carousel-inner" role="listbox">
+<div class="carousel-item">
+//- <p class="carouselTitle">6WheelsMediumCabinet</p>
+<img src="http://hps-trade.co.th/wp-content/uploads/2018/09/6wm-e1539301116918.png" height="422px" width="960px" alt="0">
 </div>
-
+<div class="carousel-item active">
+<img src="http://hps-trade.co.th/wp-content/uploads/2018/09/10W-e1539301217593.png" height="422px" width="960px" alt="1">
+</div>
+</div>
+<a class="left carousel-control" href="#carousel-example-generic-truck" role="button" data-slide="prev">
+<span class="icon-prev" aria-hidden="true"></span>
+<span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#carousel-example-generic-truck" role="button" data-slide="next">
+<span class="icon-next" aria-hidden="true"></span>
+<span class="sr-only">Next</span>
+</a>
+</div>
+//- truck status
 <div class="TruckStatus">
   <h1 class='center'><span> สถานะของรถบรรทุกประจำวันที่ </span><span class='date'>#{date}-#{month}-#{year} </span></h1>
   <table class="table">
@@ -239,3 +301,10 @@ head
 
   </table>
 </div>
+</div>
+<div class="pallet-data">
+</div>
+</div>
+
+//- footer
+include footer.pug
