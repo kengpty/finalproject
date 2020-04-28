@@ -1,41 +1,42 @@
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
+include layout.pug
 
 style.
   .wrapper {
-    display: block;
-    min-height: 100%; /* real browsers */
-    height: auto !important; /* real browsers */
-    height: 100%; /* IE6 bug */
-    background-color: lightblue;
+    //-  display: block;
+    //-  min-height: 100%; 
+    //- height: auto !important; 
+    //- height: 100%; 
+    border-right:50%;
+    background-color :white;
     
+  
   }
   .navbar{
     margin-bottom:0px;
-  }
-  .footer {
-    text-align:center;
-    color:white;
-    width: 100%;
-    padding: 20px 0;
-    margin: 0;
-    font-size: 12px;
-    background-color: #222;
-    overflow-x: hidden;
-
   }
   .navbar-inverse {
     background-color: #222;
     
     
   }
+
+  .box {
+    background-color : #222;
+    opacity : 0.3;
+    width :500px;
+    height :300px;
+    margin-left :80px
+  }
+
+  .right{
+    float: right;
+  }
+
+  .left{
+    background-color:#222;
+    float:left;
+  }
+  
 
 <nav class="navbar navbar-inverse navbar-expand-sm " >
   <div class="container-fluid">
@@ -92,7 +93,7 @@ style.
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 6 ล้อตู้ทึบขนาดกลาง</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อ ตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 10 Pallet
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อ ตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 8 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.2 เมตร</li>
                           <li>ยาว  : 5.5 เมตร </li>
@@ -118,7 +119,7 @@ style.
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 10 ล้อตู้ทึบ</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุกชนิดนี้สามารถบรรทุกสินค้าได้หนักว่ารถบรรทุกชนิด 6 ล้อ แต่ขนาดนั้นจะเท่ากันกับรถบรรทุก 6 ล้อ แต่จะแตกต่างกันที่รถชนิดนี้จะมี 10 ล้อ และบรรทุกได้สูงสุด 8 ตัน
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 10 ล้อตู้ทึบ บรรทุกได้สูงสุด 8 ตัน และขนาดของสินค้าต้องไม่เกิน 12 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.3 เมตร</li>
                           <li>ยาว  : 7.2 เมตร </li>
@@ -219,22 +220,23 @@ if truckNotAvailable
 
 
 
-<div class="wrapper">
-    <h2 style="margin-top:10px"> สามารถติดต่อได้ที่ ..................
+<div class = "wrapper">
+      <span class="mapouter right"><div class="mapouter"><div class="gmap_canvas"><iframe width="690" height="542" id="gmap_canvas" src="https://maps.google.com/maps?q=%E0%B8%84%E0%B8%93%E0%B8%B0%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%B1%E0%B8%87&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/private-internet-access-coupon/">private internet acccess sale</a></div><style>.mapouter{position:relative;text-align:right;height:542px;width:690px;}.gmap_canvas {overflow:hidden;background:none!important;height:542px;width:690px;}</style></div></span>
+      
+      <h1 style = "padding-top:100px;text-align:center;font-size:30;">ติดต่อ</h1><br>
+      <p style = "text-align:center;font-size:16;">ที่อยู่ : 1 ซอย ฉลองกรุง 1 แขวง ลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 (สจล.)</p>
+      <p style = "text-align:center;font-size:16;">เบอร์โทรศัพท์ : 086-123 4567</p>
+      </div>
+</div>  
 
-</div>
+
+
+
+
+
+
+
+
 
 //- footer
-<div class="footer">
-<div class="row">
-<div class="col-md-3" style="text-align: right; padding-bottom:10px;">
-<div class="logo"><a href="http://www.kerryexpress.com/">
-  <img src="https://th.kerryexpress.com/th/img/footer/logo.png"></a>
-</div>
-</div>
-<div class="kerry-col-md-5" style="">
-<div class="addr"><strong>บริษัท ซีเอ็สทรานสปอร์ต (ประเทศไทย) จำกัด (มหาชน)</strong></div>
-<div class="addr"> 1 ซอย ฉลองกรุง 1 แขวง ลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 ประเทศไทย 
-<div class="linkArea"><span class="font-call-center">Call Center</span> <span class="font-call-center" style="font-size:16px; font-weight:bold;">555</span></div></div></div>
-<span><a href="https://www.facebook.com/kmitlofficial/" target="_blank"><img src="https://th.kerryexpress.com/th/img/footer/icon_fb.png"></a></span>
-</div></div></div>
+include footer.pug

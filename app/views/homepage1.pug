@@ -1,69 +1,219 @@
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</head>
+include layout.pug
 <!------------------------------------------------>
 <head>
     
     style.
-      .TruckStatus{
-              margin: 0 ;
-              position: absolute ;
-              border-width:5px;  
-              padding-top: 10px;
-              padding-right: 10px;
-              padding-bottom: 10px;
-              padding-left: 20px;
-              font-size: 150%;
-              float: right;
-          }
-        .date{
-          color: blue;
-        }
-        .wrapper {
-          display: block;
-          min-height: 100%; /* real browsers */
-          height: auto !important; /* real browsers */
-          height: 100%; /* IE6 bug */
-          
-        }
-        .navbar-inverse {
-          background-color: #222;
-        }
-        .addr{
-          padding-top:5%;
-          padding-left:0%;
-        }
-        .carousel{
-          float:right;
-          
-        }
-        #carousel-example-generic-truck {
-          height: 422px;
-          width: 960px;
-        }
-        .carouselTitle {
-          font-size: 64px;
-          font-weight: 100;
-          color: white;
-          text-shadow: 0 1px 2px #000;
-          position: absolute;
-          top:0px;
-          right: 0px;
-        }
-        .truck{
-         
-          height:60%;
-        }
-        .pallet-data{
-          background-color:red;
-          height:60%;
-        }
+    
+      th {
+        background-color: #e96514;
+        color: white;
+      }
+     
+      div{
+        display:block;
+      }
+      .item {
+        width: 31.33%;
+        margin: 0 1%;
+        float: left;
+        overflow: hidden;
+      }
+      .item1{
+        width: 40%;
+        margin: 0 1%;
+        float: left;
+        overflow: hidden;
+        font-size: 14px;
+      }
 
+      .list {
+        margin: 10px auto;
+        max-width: 800px;
+      }
+      .TruckStatus{
+            width:60%;
+            text-align:center; 
+            margin-left:auto; 
+            margin-right:auto; 
+            
+              
+        }
+      .truck-status-header{
+        text-align:center;
+      }
+      .date{
+        text-align:center;
+        color: blue;
+      }
+      
+      .navbar-inverse {
+        background-color: #222;
+      }
+      
+      .c-truck{
+        width:100%;
+        position:relative;
+        margin:auto;
+      }
+      .c-pallet{
+        width:60%;
+        position:relative;
+        margin:left;
+      }
+      
+      .carousel-inner{
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+       
+      }
+      .carousel-indicators{
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        z-index: 15;
+        width: 60%;
+        padding-left: 0;
+        margin-left: -30%;
+        text-align: center;
+        list-style: none;
+      }
+      .carousel-item {
+        
+        position: relative;
+        display: none;
+        -webkit-transition: .6s ease-in-out left;
+        -o-transition: .6s ease-in-out left;
+        transition: .6s ease-in-out left;
+      }
+      .carousel-item-pallet {
+        
+        position: center;
+        display: none;
+        -webkit-transition: .6s ease-in-out left;
+        -o-transition: .6s ease-in-out left;
+        transition: .6s ease-in-out left;
+      }
+      .carouselTitle {
+        font-size: 64px;
+        font-weight: 100;
+        color: white;
+        text-shadow: 0 1px 2px #000;
+        position: absolute;
+        top:0px;
+        right: 0px;
+      }
+      .carousel-item .active{
+        transform: translate3d(-100%,0,0);
+        
+      }
+      .truck{
+        
+        height:60%;
+      }
+      .service-tab{
+        background-color:#f3f3f3;
+        height:40%;
+      }
+      .service-title{
+        color: #e96514;
+        font-size: 50px;
+        text-align: center;
+        margin: 0;
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 8px;
+        padding-left: 0;
+      }
+      .desc{
+        color: #555;
+        font-size: 20px;
+        text-align: center;
+        line-height: 1.1pt;
+      }
+      .c1{
+        
+        background-image:url(https://image.flaticon.com/icons/svg/493/493808.svg);
+      }
+      .icon{
+        margin-top:2%;
+        height: 90px;
+        background-repeat: no-repeat;
+        background-position: bottom center;
+      }
+      .tb{
+        display: table;
+        width: 100%;
+        height: 60px;
+        margin-top: 0px;
+        
+      }
+      .tb .txt{
+        display: table-cell;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        color: #37404d;
+      }
+      .tb .txt1{
+        padding-top:13%;
+        display: table-cell;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        color: #37404d;
+      }
+      .big{
+        color: #999;
+        font-size: 22px;
+
+      }
+      .contactArea {
+
+        padding-top:15;
+        
+      }
+    
+
+      .t1 {
+        color: #e96514!important;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        display: block;
+        margin-right: 10px;
+        line-height: 1.3;
+      }
+      .t2 {
+        color: #38414e;
+        font-size: 16.5px;
+        text-align: center;
+        margin-right: 10px;
+        
+      }
+      .tcontact{
+        line-height: 1.2;
+        padding-bottom: 10px;
+       
+      }
+     .btn-contact {
+        margin:auto;
+        border-radius: 100px !important;
+        background-color: #e96514;
+        color: #ffffff !important;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-family: 'WebFont','Kanit', tahoma, verdana, arial, sans-serif, "lucida grande";
+        font-size: 16px;
+        -webkit-appearance: none;
+      }
+      .button-c{
+        padding-top:0.5%;
+      }
+      
+      
 </head>
 <!------------------------------------------------>
 
@@ -123,7 +273,7 @@
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 6 ล้อตู้ทึบขนาดกลาง</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อ ตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 10 Pallet
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 8 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.2 เมตร</li>
                           <li>ยาว  : 5.5 เมตร </li>
@@ -149,7 +299,7 @@
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 10 ล้อตู้ทึบ</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุกชนิดนี้สามารถบรรทุกสินค้าได้หนักว่ารถบรรทุกชนิด 6 ล้อ แต่ขนาดนั้นจะเท่ากันกับรถบรรทุก 6 ล้อ แต่จะแตกต่างกันที่รถชนิดนี้จะมี 10 ล้อ และบรรทุกได้สูงสุด 8 ตัน
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 10 ล้อตู้ทึบ บรรทุกได้สูงสุด 8 ตัน และขนาดของสินค้าต้องไม่เกิน 12 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.3 เมตร</li>
                           <li>ยาว  : 7.2 เมตร </li>
@@ -252,21 +402,33 @@ if truckNotAvailable
 
 
 
-<div class ="wrapper">
-<div class = "truck">
-//- carousel
-<div id="carousel-example-generic-truck" class="carousel slide" data-ride="carousel">
+<div class = "truck ">
+//- carousel 
+<div id="carousel-example-generic-truck" class="carousel slide c-truck" data-ride="carousel">
 <ol class="carousel-indicators">
 <li data-target="#carousel-example-generic-truck" data-slide-to="0" class="active"></li>
 <li data-target="#carousel-example-generic-truck" data-slide-to="1"></li>
+<li data-target="#carousel-example-generic-truck" data-slide-to="2"></li>
+<li data-target="#carousel-example-generic-truck" data-slide-to="3"></li>
+<li data-target="#carousel-example-generic-truck" data-slide-to="4"></li>
 </ol>
 <div class="carousel-inner" role="listbox">
+<div class="carousel-item active">
+//- <p class="carouselTitle">6WheelsMediumCabinet</p>
+<img class="center-block" src="6wheels.jpg" style="width:80%; height:100%;" alt="0">
+</div>
+<div class="carousel-item">
+<img class="center-block" src="10wheels.jpg" style="width:80%; height:100%;" alt="1">
+</div>
 <div class="carousel-item">
 //- <p class="carouselTitle">6WheelsMediumCabinet</p>
-<img src="http://hps-trade.co.th/wp-content/uploads/2018/09/6wm-e1539301116918.png" height="422px" width="960px" alt="0">
+<img class="center-block" src="euro.png" style="width:80%; height:100%;" alt="3">
 </div>
-<div class="carousel-item active">
-<img src="http://hps-trade.co.th/wp-content/uploads/2018/09/10W-e1539301217593.png" height="422px" width="960px" alt="1">
+<div class="carousel-item">
+<img class="center-block" src="thai.png" style="width:80%; height:100%;" alt="4">
+</div>
+<div class="carousel-item">
+<img class="center-block" src="japan.png" style="width:80%; height:100%;" alt="5">
 </div>
 </div>
 <a class="left carousel-control" href="#carousel-example-generic-truck" role="button" data-slide="prev">
@@ -278,10 +440,11 @@ if truckNotAvailable
 <span class="sr-only">Next</span>
 </a>
 </div>
+</div>
 //- truck status
 <div class="TruckStatus">
-  <h1 class='center'><span> สถานะของรถบรรทุกประจำวันที่ </span><span class='date'>#{date}-#{month}-#{year} </span></h1>
-  <table class="table">
+  <h1 class='truck-status-header'><p> สถานะของรถบรรทุกประจำวันที่ </p><p class='date'>#{date}-#{month}-#{year} </p></h1>
+  <table class="table" style="overflow-x:auto;">
   <thead>
     <tr>
       <th class="text-center" scope="col">หมายเลขทะเบียนรถ</th>
@@ -292,19 +455,52 @@ if truckNotAvailable
   <tbody>
     each a in indexdata
       <tr>
-        <th class="text-center"scope="row">#{a.licensePlate}</th>
+        <td class="text-center"scope="row">#{a.licensePlate}</td>
         <td class="text-center">#{a.type}</td>
         <td class="text-center">#{a.status}</td>
-        </tr>
+      </tr>
     
       </tbody>
 
   </table>
 </div>
 </div>
-<div class="pallet-data">
+
+<div class="service-tab">
+ <h3 class="service-title">บริการขนส่งสินค้า</h3>
+ <p class="desc">เป็นระบบการขนส่งวันต่อวัน</p>
+<div class="list">
+  <div class="item">
+  <div class="icon c1"></div>
+  <div class="tb">
+  <div class="txt">
+  <div class="big">Business to Business</div>ธุรกิจ-ส่งถึง-ธุรกิจ</div>
+  </div>
+  </div>
+  <div class="item1">
+  <div class="tb">
+  <div class="txt1">บริการช่วยเหลือในการขนส่งสินค้าจากโกดังเก็บของไปยังโกดังเก็บของตามที่ลูกค้าต้องการ โดยเป็นการขนส่งโดยใช้ Pallet ในการจัดส่ง<p><strong>เนื่องจากยังเป็นระบบยังอยู่ในขั้นการทดสอบจึงมีการกำหนดการขนส่งภายในจังหวัดกรุงเทพฯเท่านั้น</strong></p></div>
+  </div>
+  </div>
+                
 </div>
 </div>
+//- contactArea
+
+<div class="contactArea" >
+<div class="inner"> 
+<img class="rounded mx-auto d-block" src="icon_where.png">
+<div class="t1">ที่ตั้งบริษัท</div>
+<div class="t2">บริษัท ซีเอ็ส ทรานสปอร์ต</div>
+<div class="text-center button-c">
+<a href="http://localhost:1000/contact" class="btn-contact" role="button">ค้นหาที่อยู่บริษัท</a> 
+</div>
+</div>
+
+ 
+
+
+
 
 //- footer
 include footer.pug

@@ -1,12 +1,4 @@
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
+include layout.pug
 
   style.
     .nodata
@@ -19,8 +11,11 @@
       transform: translate(-50%, -50%) ;
      
     }
+    .table-data{
+      height:100%;
+    }
 
-<body>
+
 <nav class="navbar navbar-inverse navbar-expand-sm" >
   <div class="container-fluid">
     <div class="navbar-header">
@@ -53,7 +48,7 @@
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 6 ล้อตู้ทึบขนาดกลาง</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อ ตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 10 Pallet
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 6 ล้อ ตู้ทึบเป็นรถบรรทุกมาตรฐานที่นิยมใช้โดยทั่วไป ที่ใช้ในการขนส่งในประเทศไทย ซึ่งรถบรรทุกชนิดนี่จะเหมาะกับสินค้าที่มีน้ำหนักไม่เกิน 5 ตัน และขนาดของสินค้าที่มีขนาดไม่เกิน 8 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.2 เมตร</li>
                           <li>ยาว  : 5.5 เมตร </li>
@@ -79,7 +74,7 @@
                       </div>
                       <div class="modal-body text-left">
                         <h1>รถบรรทุก 10 ล้อตู้ทึบ</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุกชนิดนี้สามารถบรรทุกสินค้าได้หนักว่ารถบรรทุกชนิด 6 ล้อ แต่ขนาดนั้นจะเท่ากันกับรถบรรทุก 6 ล้อ แต่จะแตกต่างกันที่รถชนิดนี้จะมี 10 ล้อ และบรรทุกได้สูงสุด 8 ตัน
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; รถบรรทุก 10 ล้อตู้ทึบ บรรทุกได้สูงสุด 8 ตัน และขนาดของสินค้าต้องไม่เกิน 12 Pallet
                         <ul type="disc"><h2>ลักษณะของรถบรรทุก</h2>
                           <li>กว้าง : 2.3 เมตร</li>
                           <li>ยาว  : 7.2 เมตร </li>
@@ -187,7 +182,7 @@ if nomoreData
  <div class="nodata" >ไม่มีข้อมูล</div>
  
 
- 
+<div class="table-data">
 if singleTruck
   <table class="table">
     <thead>
@@ -225,4 +220,8 @@ if singleTruck
     </tbody>
 
 </table>
+</div>
+</div>
 
+
+include footer.pug
